@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		DC13EE9B281158B80067652D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13EE9A281158B80067652D /* AppDelegate.swift */; };
 		DC13EE9D281158B80067652D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13EE9C281158B80067652D /* SceneDelegate.swift */; };
-		DC13EE9F281158B80067652D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13EE9E281158B80067652D /* ViewController.swift */; };
-		DC13EEA2281158B80067652D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC13EEA0281158B80067652D /* Main.storyboard */; };
+		DC13EE9F281158B80067652D /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13EE9E281158B80067652D /* CardsViewController.swift */; };
 		DC13EEA4281158B90067652D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC13EEA3281158B90067652D /* Assets.xcassets */; };
 		DC13EEA7281158B90067652D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC13EEA5281158B90067652D /* LaunchScreen.storyboard */; };
+		DC602EB92818E9AE00B78C66 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EB82818E9AE00B78C66 /* Card.swift */; };
+		DC602EBB2818EA0D00B78C66 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EBA2818EA0D00B78C66 /* Concentration.swift */; };
+		DC602EBE2818EB8000B78C66 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EBD2818EB8000B78C66 /* Theme.swift */; };
+		DC602EC22818F23000B78C66 /* Extensions+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC12818F23000B78C66 /* Extensions+Int.swift */; };
+		DC602EC72818F62A00B78C66 /* CardPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC62818F62A00B78C66 /* CardPresenterDelegate.swift */; };
+		DC602ECA281983E900B78C66 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC9281983E900B78C66 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DC13EE97281158B80067652D /* Stanford.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stanford.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC13EE9A281158B80067652D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC13EE9C281158B80067652D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DC13EE9E281158B80067652D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DC13EEA1281158B80067652D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC13EE9E281158B80067652D /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		DC13EEA3281158B90067652D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC13EEA6281158B90067652D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC13EEA8281158B90067652D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC602EB82818E9AE00B78C66 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		DC602EBA2818EA0D00B78C66 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		DC602EBD2818EB8000B78C66 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DC602EC12818F23000B78C66 /* Extensions+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Int.swift"; sourceTree = "<group>"; };
+		DC602EC62818F62A00B78C66 /* CardPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresenterDelegate.swift; sourceTree = "<group>"; };
+		DC602EC9281983E900B78C66 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,76 @@
 		DC13EE99281158B80067652D /* Stanford */ = {
 			isa = PBXGroup;
 			children = (
-				DC13EE9A281158B80067652D /* AppDelegate.swift */,
-				DC13EE9C281158B80067652D /* SceneDelegate.swift */,
-				DC13EE9E281158B80067652D /* ViewController.swift */,
-				DC13EEA0281158B80067652D /* Main.storyboard */,
-				DC13EEA3281158B90067652D /* Assets.xcassets */,
-				DC13EEA5281158B90067652D /* LaunchScreen.storyboard */,
+				DC13EEAE281158EA0067652D /* App */,
+				DC602EB72818E9A100B78C66 /* Model */,
+				DC602EBC2818EB7300B78C66 /* View */,
+				DC602EC52818F3AD00B78C66 /* Presenter */,
+				DC602EBF2818EB9200B78C66 /* Controller */,
+				DC602EC02818F21D00B78C66 /* Extensions */,
+				DC13EEAF281158F40067652D /* Supporting Files */,
 				DC13EEA8281158B90067652D /* Info.plist */,
 			);
 			path = Stanford;
+			sourceTree = "<group>";
+		};
+		DC13EEAE281158EA0067652D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DC13EE9A281158B80067652D /* AppDelegate.swift */,
+				DC13EE9C281158B80067652D /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DC13EEAF281158F40067652D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC13EEA3281158B90067652D /* Assets.xcassets */,
+				DC13EEA5281158B90067652D /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC602EB72818E9A100B78C66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DC602EB82818E9AE00B78C66 /* Card.swift */,
+				DC602EBA2818EA0D00B78C66 /* Concentration.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DC602EBC2818EB7300B78C66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC602EBD2818EB8000B78C66 /* Theme.swift */,
+				DC602EC9281983E900B78C66 /* CustomButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC602EBF2818EB9200B78C66 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DC13EE9E281158B80067652D /* CardsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC602EC02818F21D00B78C66 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DC602EC12818F23000B78C66 /* Extensions+Int.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DC602EC52818F3AD00B78C66 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				DC602EC62818F62A00B78C66 /* CardPresenterDelegate.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +198,6 @@
 			files = (
 				DC13EEA7281158B90067652D /* LaunchScreen.storyboard in Resources */,
 				DC13EEA4281158B90067652D /* Assets.xcassets in Resources */,
-				DC13EEA2281158B80067652D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +208,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC13EE9F281158B80067652D /* ViewController.swift in Sources */,
+				DC13EE9F281158B80067652D /* CardsViewController.swift in Sources */,
+				DC602EBB2818EA0D00B78C66 /* Concentration.swift in Sources */,
 				DC13EE9B281158B80067652D /* AppDelegate.swift in Sources */,
+				DC602ECA281983E900B78C66 /* CustomButton.swift in Sources */,
+				DC602EC72818F62A00B78C66 /* CardPresenterDelegate.swift in Sources */,
+				DC602EC22818F23000B78C66 /* Extensions+Int.swift in Sources */,
+				DC602EBE2818EB8000B78C66 /* Theme.swift in Sources */,
 				DC13EE9D281158B80067652D /* SceneDelegate.swift in Sources */,
+				DC602EB92818E9AE00B78C66 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DC13EEA0281158B80067652D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DC13EEA1281158B80067652D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DC13EEA5281158B90067652D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -294,7 +362,6 @@
 				INFOPLIST_FILE = Stanford/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -322,7 +389,6 @@
 				INFOPLIST_FILE = Stanford/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
