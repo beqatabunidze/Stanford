@@ -106,12 +106,10 @@ class CardPresenter {
 
     }
     
-    init(delegate: CardPresenterDelegate, newGameButton: CustomButton, emojiButtonArr : [CustomButton], concentration: Concentration, cardsAndEmojiMap: [Card : String]) {
+    init(delegate: CardPresenterDelegate, newGameButton: CustomButton, emojiButtonArr : [CustomButton]) {
         self.delegate = delegate
         self.newGameButton = newGameButton
         self.emojiButtonArr = emojiButtonArr
-        self.concentration = concentration
-        self.cardsAndEmojisMap = cardsAndEmojiMap
     }
     
 }

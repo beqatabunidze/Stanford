@@ -28,14 +28,9 @@ class CardsViewController: UIViewController {
     private var regularConstraints: [NSLayoutConstraint] = []
     private var sharedConstraints: [NSLayoutConstraint] = []
     
-    private lazy var concentration = Concentration(numberOfPairs: (emojiButtonArr.count / 2))
-    private var cardsAndEmojisMap = [Card : String]()
-    
     private lazy var presenter = CardPresenter(delegate: self,
                                                newGameButton: self.newGameButton,
-                                               emojiButtonArr: self.emojiButtonArr,
-                                               concentration: self.concentration,
-                                               cardsAndEmojiMap: self.cardsAndEmojisMap
+                                               emojiButtonArr: self.emojiButtonArr
     )
     
     override func loadView() {
@@ -190,7 +185,6 @@ class CardsViewController: UIViewController {
             NSLayoutConstraint.activate(sharedConstraints)
         }
         
-        
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             if regularConstraints.count > 0 && regularConstraints[0].isActive {
                 NSLayoutConstraint.deactivate(regularConstraints)
@@ -215,16 +209,13 @@ class CardsViewController: UIViewController {
         presenter.chooseRandomTheme()
         presenter.setButtonActions()
         traitCollectionDidChange( UIScreen.main.traitCollection)
-        
     }
-    
 }
 
 extension CardsViewController: CardPresenterDelegate {
+    
     func setLabels(_ scoreLabel: String, _ flipLabel: String) {
         self.scoreLabel.text = scoreLabel
         self.flipLabel.text = flipLabel
     }
-    
-
 }
