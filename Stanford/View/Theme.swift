@@ -46,12 +46,4 @@ enum Theme: Int {
         }
     }
     
-    static var count: Int {
-        return Theme.Fruit.rawValue + 1
-    }
-    
-    static func getRandom() -> Theme {
-        return Theme(rawValue: Theme.count.arc4random)!
-    }
-    
 }

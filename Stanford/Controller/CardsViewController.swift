@@ -236,7 +236,7 @@ extension CardsViewController: CardPresenterProtocol {
     
     func setTheme() {
         
-        pickedTheme = Theme.getRandom()
+        pickedTheme = presenter?.getRandom()
         cardsAndEmojisMap = [:]
         
         var emojis = pickedTheme.emojis

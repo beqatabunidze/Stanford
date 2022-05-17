@@ -16,10 +16,18 @@ protocol CardPresenterProtocol: AnyObject {
 
 final class CardPresenter {
     
+    init(delegate: CardPresenterProtocol, concentration: Concentration) {
+        self.delegate = delegate
+        self.concentration = concentration
+    }
+    
     weak var delegate: CardPresenterProtocol?
     
     private var concentration: Concentration
     
+    private var count: Int {
+        return Theme.Fruit.rawValue + 1
+    }
     
     func displayLabelValues() {
         
@@ -28,9 +36,9 @@ final class CardPresenter {
         
     }
     
-    init(delegate: CardPresenterProtocol, concentration: Concentration) {
-        self.delegate = delegate
-        self.concentration = concentration
+    func getRandom() -> Theme {
+        return Theme(rawValue: self.count.arc4random)!
     }
+    
     
 }
