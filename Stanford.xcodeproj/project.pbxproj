@@ -16,7 +16,7 @@
 		DC602EBB2818EA0D00B78C66 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EBA2818EA0D00B78C66 /* Concentration.swift */; };
 		DC602EBE2818EB8000B78C66 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EBD2818EB8000B78C66 /* Theme.swift */; };
 		DC602EC22818F23000B78C66 /* Extensions+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC12818F23000B78C66 /* Extensions+Int.swift */; };
-		DC602EC72818F62A00B78C66 /* CardPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC62818F62A00B78C66 /* CardPresenterDelegate.swift */; };
+		DC602EC72818F62A00B78C66 /* CardPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC62818F62A00B78C66 /* CardPresenterProtocol.swift */; };
 		DC602ECA281983E900B78C66 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC602EC9281983E900B78C66 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,7 @@
 		DC602EBA2818EA0D00B78C66 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		DC602EBD2818EB8000B78C66 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		DC602EC12818F23000B78C66 /* Extensions+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Int.swift"; sourceTree = "<group>"; };
-		DC602EC62818F62A00B78C66 /* CardPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresenterDelegate.swift; sourceTree = "<group>"; };
+		DC602EC62818F62A00B78C66 /* CardPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresenterProtocol.swift; sourceTree = "<group>"; };
 		DC602EC9281983E900B78C66 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,7 +133,7 @@
 		DC602EC52818F3AD00B78C66 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				DC602EC62818F62A00B78C66 /* CardPresenterDelegate.swift */,
+				DC602EC62818F62A00B78C66 /* CardPresenterProtocol.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -212,7 +212,7 @@
 				DC602EBB2818EA0D00B78C66 /* Concentration.swift in Sources */,
 				DC13EE9B281158B80067652D /* AppDelegate.swift in Sources */,
 				DC602ECA281983E900B78C66 /* CustomButton.swift in Sources */,
-				DC602EC72818F62A00B78C66 /* CardPresenterDelegate.swift in Sources */,
+				DC602EC72818F62A00B78C66 /* CardPresenterProtocol.swift in Sources */,
 				DC602EC22818F23000B78C66 /* Extensions+Int.swift in Sources */,
 				DC602EBE2818EB8000B78C66 /* Theme.swift in Sources */,
 				DC13EE9D281158B80067652D /* SceneDelegate.swift in Sources */,

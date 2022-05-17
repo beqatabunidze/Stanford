@@ -9,32 +9,54 @@ import UIKit
 
 class CardsViewController: UIViewController {
     
-    var flipLabel : UILabel!
-    var scoreLabel : UILabel!
+    private var flipLabel = UILabel()
+    private var scoreLabel = UILabel()
     
-    var newGameButton : CustomButton!
-    var emojiButtonArr : [CustomButton]!
+    private var newGameButton = CustomButton()
+    private var emojiButtonArr = [CustomButton]()
     
-    var hStackArr : [UIStackView]!
-    var hStack1 : UIStackView!
-    var vStack1 : UIStackView!
+    private var cardsAndEmojisMap = [Card : String]()
     
-    var newGameButton1 : CustomButton!
-    var newGameButton2 : CustomButton!
-    var newGameButton3 : CustomButton!
-    var newGameButton4 : CustomButton!
+    private var pickedTheme: Theme!
+    
+    private var stackHorizontalButtons = [UIStackView]()
+    private var stackOfLabels = UIStackView()
+    private var stackOfVerticalButtons = UIStackView()
     
     private var compactConstraints: [NSLayoutConstraint] = []
     private var regularConstraints: [NSLayoutConstraint] = []
     private var sharedConstraints: [NSLayoutConstraint] = []
     
-    private lazy var presenter = CardPresenter(delegate: self,
-                                               newGameButton: self.newGameButton,
-                                               emojiButtonArr: self.emojiButtonArr
-    )
+    private lazy var concentration = Concentration(numberOfPairs: (emojiButtonArr.count / 2))
+    
+    private var presenter: CardPresenter?
     
     override func loadView() {
         setupLayout()
+    }
+    
+    private func setupLabelConstraints(_ label: UILabel, _ text: String) {
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = text
+        label.textAlignment = .center
+        label.numberOfLines = 1;
+        label.adjustsFontSizeToFitWidth = true;
+        label.adjustsFontForContentSizeCategory = true
+        label.font = scoreLabel.font.withSize(35)
+        label.textColor = .white
+        label.adjustsFontForContentSizeCategory = true
+    }
+    
+    private func setupStackConstraints(_ stack: UIStackView, _ axis: NSLayoutConstraint.Axis) {
+        
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .fillEqually
+        stack.axis = axis
+        stack.alignment = .fill
+        stack.contentMode = .scaleToFill
+        stack.spacing = 10
+        
     }
     
     private func setupLayout() {
@@ -43,56 +65,22 @@ class CardsViewController: UIViewController {
         view.backgroundColor = UIColor.black.withAlphaComponent(0)
         view.isOpaque = false
         
-        scoreLabel = UILabel()
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.text = "Score:\(0)"
-        scoreLabel.textAlignment = .center
-        scoreLabel.numberOfLines = 1;
-        scoreLabel.adjustsFontSizeToFitWidth = true;
-        scoreLabel.adjustsFontForContentSizeCategory = true
-        scoreLabel.font = scoreLabel.font.withSize(35)
-        scoreLabel.textColor = .white
-        
-        flipLabel = UILabel()
-        flipLabel.translatesAutoresizingMaskIntoConstraints = false
-        flipLabel.text = "Flips:\(0)"
-        flipLabel.textAlignment = .center
-        flipLabel.numberOfLines = 1;
-        flipLabel.adjustsFontSizeToFitWidth = true;
-        flipLabel.font = flipLabel.font.withSize(35)
-        flipLabel.textColor = .white
-        
-        flipLabel.adjustsFontForContentSizeCategory = true
-        
-        hStack1 = UIStackView()
-        hStack1.translatesAutoresizingMaskIntoConstraints = false
-        hStack1.distribution = .fillEqually
-        hStack1.axis = .horizontal
-        hStack1.alignment = .fill
-        hStack1.contentMode = .scaleToFill
-        hStack1.addArrangedSubview(flipLabel)
-        hStack1.addArrangedSubview(scoreLabel)
-        
-        hStackArr = [UIStackView]()
+        setupLabelConstraints(scoreLabel, "Score:\(0)")
+        setupLabelConstraints(flipLabel, "Flips:\(0)")
+        setupStackConstraints(stackOfLabels, .horizontal)
+        stackOfLabels.addArrangedSubview(flipLabel)
+        stackOfLabels.addArrangedSubview(scoreLabel)
         
         for _ in 0..<4 {
             let hstack = UIStackView()
-            hstack.translatesAutoresizingMaskIntoConstraints = false
-            hstack.distribution = .fillEqually
-            hstack.axis = .horizontal
-            hstack.alignment = .fill
-            hstack.contentMode = .scaleToFill
-            hstack.spacing = 10
-            hStackArr.append(hstack)
+            setupStackConstraints(hstack, .horizontal)
+            stackHorizontalButtons.append(hstack)
         }
         
         let newGameButtonWidth = 160
-        newGameButton = CustomButton()
         newGameButton.translatesAutoresizingMaskIntoConstraints = false
         newGameButton.isUserInteractionEnabled = true
         newGameButton.setTitle("New Game", for: .normal)
-        
-        emojiButtonArr = [CustomButton]()
         
         for _ in 0..<16 {
             
@@ -107,70 +95,63 @@ class CardsViewController: UIViewController {
             emojiButtonArr[i].translatesAutoresizingMaskIntoConstraints = false
             emojiButtonArr[i].isUserInteractionEnabled = true
             emojiButtonArr[i].setTitle("", for: .normal)
-            
             emojiButtonArr[i].titleLabel?.font = UIFont(name: "GillSans-Italic", size: 50)
             
         }
         
         for a in 0..<4 {
-            hStackArr[0].addArrangedSubview(emojiButtonArr[a])
+            stackHorizontalButtons[0].addArrangedSubview(emojiButtonArr[a])
         }
         for b in 4..<8 {
-            hStackArr[1].addArrangedSubview(emojiButtonArr[b])
+            stackHorizontalButtons[1].addArrangedSubview(emojiButtonArr[b])
         }
         for c in 8..<12 {
-            hStackArr[2].addArrangedSubview(emojiButtonArr[c])
+            stackHorizontalButtons[2].addArrangedSubview(emojiButtonArr[c])
         }
         for d in 12..<16 {
-            hStackArr[3].addArrangedSubview(emojiButtonArr[d])
+            stackHorizontalButtons[3].addArrangedSubview(emojiButtonArr[d])
         }
         
-        vStack1 = UIStackView()
-        vStack1.translatesAutoresizingMaskIntoConstraints = false
-        vStack1.distribution = .fillEqually
-        vStack1.axis = .vertical
-        vStack1.alignment = .fill
-        vStack1.contentMode = .scaleToFill
-        vStack1.spacing = 10
+        setupStackConstraints(stackOfVerticalButtons, .vertical)
         
         for hstackItem in 0..<4 {
-            vStack1.addArrangedSubview( hStackArr[hstackItem])
+            stackOfVerticalButtons.addArrangedSubview( stackHorizontalButtons[hstackItem])
         }
         
         view.addSubview(newGameButton)
-        view.addSubview(hStack1)
-        view.addSubview(vStack1)
+        view.addSubview(stackOfLabels)
+        view.addSubview(stackOfVerticalButtons)
         
         sharedConstraints.append(contentsOf: [
             
             newGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             newGameButton.widthAnchor.constraint(equalToConstant: CGFloat(newGameButtonWidth)),
             
-            hStack1.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
-            hStack1.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16),
-            hStack1.heightAnchor.constraint(equalToConstant: 42),
-            hStack1.topAnchor.constraint(greaterThanOrEqualTo: vStack1.bottomAnchor, constant: 16),
-            vStack1.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            stackOfLabels.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor, constant: 16),
+            stackOfLabels.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor, constant: -16),
+            stackOfLabels.heightAnchor.constraint(equalToConstant: 42),
+            stackOfLabels.topAnchor.constraint(greaterThanOrEqualTo: stackOfVerticalButtons.bottomAnchor, constant: 16),
+            stackOfVerticalButtons.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             
         ])
         
         compactConstraints.append(contentsOf: [
-            vStack1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 16),
+            stackOfVerticalButtons.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 16),
             newGameButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -10),
-            vStack1.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor,constant: 16),
-            hStack1.bottomAnchor.constraint(equalTo: newGameButton.topAnchor, constant: -30),
-            vStack1.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor,constant: -16),
+            stackOfVerticalButtons.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor,constant: 16),
+            stackOfLabels.bottomAnchor.constraint(equalTo: newGameButton.topAnchor, constant: -30),
+            stackOfVerticalButtons.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor,constant: -16),
             
         ])
         
         regularConstraints.append(contentsOf: [
             
-            vStack1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackOfVerticalButtons.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             newGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -5),
             newGameButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 35.0),
-            vStack1.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor,constant: 100),
-            vStack1.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor,constant: -100),
-            hStack1.bottomAnchor.constraint(equalTo: newGameButton.topAnchor, constant: -15)
+            stackOfVerticalButtons.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor,constant: 100),
+            stackOfVerticalButtons.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor,constant: -100),
+            stackOfLabels.bottomAnchor.constraint(equalTo: newGameButton.topAnchor, constant: -15)
             
         ])
     }
@@ -206,13 +187,88 @@ class CardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.chooseRandomTheme()
-        presenter.setButtonActions()
+        presenter = CardPresenter(delegate: self, concentration: concentration)
+        setTheme()
+        setupButtons()
         traitCollectionDidChange( UIScreen.main.traitCollection)
+        
+    }
+    
+    private func setupButtons() {
+        
+        addActionToNewGameButton(with: newGameButton)
+        
+        for button in 0..<16 {
+            addActionToEmojiGameButton(with: emojiButtonArr[button])
+        }
+    }
+    
+    internal func addActionToNewGameButton(with button : CustomButton) {
+        button.addTarget(self, action: #selector(newGameButtonTapped), for: .touchUpInside)
+    }
+    
+    private func addActionToEmojiGameButton(with button : CustomButton) {
+        button.addTarget(self, action: #selector(emojiGameButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func newGameButtonTapped(sender :CustomButton!) {
+        
+        setTheme()
+        concentration.resetGame()
+        displayCards()
+        presenter?.displayLabelValues()
+        
+    }
+    
+    @objc private func emojiGameButtonTapped(sender :CustomButton!) {
+        
+        guard let index = emojiButtonArr.firstIndex(of: sender) else { return }
+        concentration.flipCard(at: index)
+        
+        displayCards()
+        presenter?.displayLabelValues()
+
     }
 }
 
-extension CardsViewController: CardPresenterDelegate {
+extension CardsViewController: CardPresenterProtocol {
+    
+    
+    func setTheme() {
+        
+        pickedTheme = Theme.getRandom()
+        cardsAndEmojisMap = [:]
+        
+        var emojis = pickedTheme.emojis
+        
+        for card in concentration.cards {
+            if cardsAndEmojisMap[card] == nil {
+                cardsAndEmojisMap[card] = emojis.remove(at: emojis.count.arc4random)
+            }
+        }
+        
+        displayCards()
+    }
+    
+    func displayCards() {
+        
+        for (index, cardButton) in emojiButtonArr.enumerated() {
+            guard concentration.cards.indices.contains(index) else { continue }
+            
+            let card = concentration.cards[index]
+            
+            if card.isFaceUp {
+                
+                cardButton.setTitle(cardsAndEmojisMap[card], for: .normal)
+                cardButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                
+            } else {
+                
+                cardButton.setTitle("", for: .normal)
+                cardButton.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : pickedTheme.cardColor
+            }
+        }
+    }
     
     func setLabels(_ scoreLabel: String, _ flipLabel: String) {
         self.scoreLabel.text = scoreLabel
